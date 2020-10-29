@@ -20,8 +20,8 @@ mv opencv-master opencv
 # Create build directory for creating make files
 mkdir -p build && cd build
 
-# This line is the most important. Replace shius with your MSUID
-cmake -D CMAKE_BUILD_TYPE=Release -D OPENCV_GENERATE_PKGCONFIG=YES -D CMAKE_INSTALL_PREFIX=/mnt/home/mengfanr/opencv/ ../opencv
+# This line is the most important. Replace vischuli with your MSUID
+cmake -D CMAKE_BUILD_TYPE=Release -D OPENCV_GENERATE_PKGCONFIG=YES -D CMAKE_INSTALL_PREFIX=/mnt/home/vischuli/opencv/ ../opencv
 
 # Finish installation
 make -j4
@@ -29,3 +29,5 @@ make install
 
 # Testing install
 ~/bin/opencv/bin/opencv_version
+
+#Having issue compiling openCV2 with darknet
