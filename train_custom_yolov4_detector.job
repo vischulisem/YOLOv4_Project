@@ -289,5 +289,9 @@ Loading weights from yolov4.conv.137...Done!
 Learning Rate: 0.001, Momentum: 0.949, Decay: 0.0005
 Resizing
 608
-Couldn't open file: data/obj/labelsInamage_jpg.rf.65322d152e11c328217e630364f8e5f5.txt
+Couldn't open file: data/obj/labelsImage_jpg.rf.65322d152e11c328217e630364f8e5f5.txt
 
+Steps I took:
+-look for it in my 'train' folder, there is a file that exists: _darknet.labels
+-look for it in roboflow darknet github - can't find
+-look for it anywhere in my darknet folder on hpcc - can't find
