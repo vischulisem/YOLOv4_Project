@@ -48,7 +48,6 @@ with open('./cfg/custom-yolov4-detector.cfg', 'a') as f:
     # change line classes=80 to your number of objects in each of 3 [yolo]-layers:
     # change [filters=255] to filters=(classes + 5)x3 in the 3 [convolutional] before each [yolo] layer, keep in mind that it only has to be the last [convolutional] before each of the [yolo] layers.
 
-#cfg/yolo4-custom2.cfg does not exist??????
     with open('cfg/yolov4-custom2.cfg', 'r') as f2:
         content = f2.readlines()
         for line in content:
@@ -97,3 +96,7 @@ with open('./cfg/custom-yolov4-detector.cfg', 'a') as f:
             f.write(line)
 
 print("file is written!")
+
+#as a note: I had to add yolov4-custom2.cfg - yolov4-custom5.cfg from https://github.com/roboflow-ai/darknet/tree/master/cfg
+#They do not exist when cloning original darknet
+#they are special files from roboflow darknet repository

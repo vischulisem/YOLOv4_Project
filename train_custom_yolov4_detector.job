@@ -1,0 +1,293 @@
+#This script will train your custom yolov4 detector
+#I am submitting this as a job since it will take a while to train.
+
+#!/bin/bash --login
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=7-00:00:00
+#SBATCH --mem-per-cpu=16G
+# output information about how this job is running using bash commands
+echo "This job is running on $HOSTNAME on `date`"
+
+#go to darknet repository
+cd /mnt/ufs18/home-010/vischuli/darknet/
+
+#train custom detector
+#make sure you are in node that has Nvidia GPU
+
+!./darknet detector train data/obj.data cfg/custom-yolov4-detector.cfg yolov4.conv.137 -dont_show -map
+
+#If you get CUDA out of memory adjust subdivisions above!
+#adjust max batches down for shorter training above
+
+
+
+
+#error
+custom-yolov4-detector
+layer     filters    size              input                output
+    0 Couldn't find activation function mish, going with ReLU
+conv     32  3 x 3 / 1   416 x 416 x   3   ->   416 x 416 x  32  0.299 BFLOPs
+    1 Couldn't find activation function mish, going with ReLU
+conv     64  3 x 3 / 2   416 x 416 x  32   ->   208 x 208 x  64  1.595 BFLOPs
+    2 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   208 x 208 x  64   ->   208 x 208 x  64  0.354 BFLOPs
+    3 route  1
+    4 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   208 x 208 x  64   ->   208 x 208 x  64  0.354 BFLOPs
+    5 Couldn't find activation function mish, going with ReLU
+conv     32  1 x 1 / 1   208 x 208 x  64   ->   208 x 208 x  32  0.177 BFLOPs
+    6 Couldn't find activation function mish, going with ReLU
+conv     64  3 x 3 / 1   208 x 208 x  32   ->   208 x 208 x  64  1.595 BFLOPs
+    7 res    4                 208 x 208 x  64   ->   208 x 208 x  64
+    8 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   208 x 208 x  64   ->   208 x 208 x  64  0.354 BFLOPs
+    9 route  8 2
+   10 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   208 x 208 x 128   ->   208 x 208 x  64  0.709 BFLOPs
+   11 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 2   208 x 208 x  64   ->   104 x 104 x 128  1.595 BFLOPs
+   12 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   104 x 104 x 128   ->   104 x 104 x  64  0.177 BFLOPs
+   13 route  11
+   14 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   104 x 104 x 128   ->   104 x 104 x  64  0.177 BFLOPs
+   15 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   104 x 104 x  64   ->   104 x 104 x  64  0.089 BFLOPs
+   16 Couldn't find activation function mish, going with ReLU
+conv     64  3 x 3 / 1   104 x 104 x  64   ->   104 x 104 x  64  0.797 BFLOPs
+   17 res   14                 104 x 104 x  64   ->   104 x 104 x  64
+   18 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   104 x 104 x  64   ->   104 x 104 x  64  0.089 BFLOPs
+   19 Couldn't find activation function mish, going with ReLU
+conv     64  3 x 3 / 1   104 x 104 x  64   ->   104 x 104 x  64  0.797 BFLOPs
+   20 res   17                 104 x 104 x  64   ->   104 x 104 x  64
+   21 Couldn't find activation function mish, going with ReLU
+conv     64  1 x 1 / 1   104 x 104 x  64   ->   104 x 104 x  64  0.089 BFLOPs
+   22 route  21 12
+   23 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1   104 x 104 x 128   ->   104 x 104 x 128  0.354 BFLOPs
+   24 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 2   104 x 104 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+   25 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+   26 route  24
+   27 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+   28 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   29 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   30 res   27                  52 x  52 x 128   ->    52 x  52 x 128
+   31 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   32 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   33 res   30                  52 x  52 x 128   ->    52 x  52 x 128
+   34 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   35 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   36 res   33                  52 x  52 x 128   ->    52 x  52 x 128
+   37 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   38 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   39 res   36                  52 x  52 x 128   ->    52 x  52 x 128
+   40 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   41 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   42 res   39                  52 x  52 x 128   ->    52 x  52 x 128
+   43 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   44 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   45 res   42                  52 x  52 x 128   ->    52 x  52 x 128
+   46 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   47 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   48 res   45                  52 x  52 x 128   ->    52 x  52 x 128
+   49 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   50 Couldn't find activation function mish, going with ReLU
+conv    128  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.797 BFLOPs
+   51 res   48                  52 x  52 x 128   ->    52 x  52 x 128
+   52 Couldn't find activation function mish, going with ReLU
+conv    128  1 x 1 / 1    52 x  52 x 128   ->    52 x  52 x 128  0.089 BFLOPs
+   53 route  52 25
+   54 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 256  0.354 BFLOPs
+   55 Couldn't find activation function mish, going with ReLU
+conv    512  3 x 3 / 2    52 x  52 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+   56 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+   57 route  55
+   58 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+   59 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   60 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   61 res   58                  26 x  26 x 256   ->    26 x  26 x 256
+   62 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   63 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   64 res   61                  26 x  26 x 256   ->    26 x  26 x 256
+   65 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   66 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   67 res   64                  26 x  26 x 256   ->    26 x  26 x 256
+   68 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   69 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   70 res   67                  26 x  26 x 256   ->    26 x  26 x 256
+   71 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   72 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   73 res   70                  26 x  26 x 256   ->    26 x  26 x 256
+   74 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   75 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   76 res   73                  26 x  26 x 256   ->    26 x  26 x 256
+   77 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   78 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   79 res   76                  26 x  26 x 256   ->    26 x  26 x 256
+   80 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   81 Couldn't find activation function mish, going with ReLU
+conv    256  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.797 BFLOPs
+   82 res   79                  26 x  26 x 256   ->    26 x  26 x 256
+   83 Couldn't find activation function mish, going with ReLU
+conv    256  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 256  0.089 BFLOPs
+   84 route  83 56
+   85 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 512  0.354 BFLOPs
+   86 Couldn't find activation function mish, going with ReLU
+conv   1024  3 x 3 / 2    26 x  26 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+   87 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+   88 route  86
+   89 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+   90 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.089 BFLOPs
+   91 Couldn't find activation function mish, going with ReLU
+conv    512  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.797 BFLOPs
+   92 res   89                  13 x  13 x 512   ->    13 x  13 x 512
+   93 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.089 BFLOPs
+   94 Couldn't find activation function mish, going with ReLU
+conv    512  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.797 BFLOPs
+   95 res   92                  13 x  13 x 512   ->    13 x  13 x 512
+   96 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.089 BFLOPs
+   97 Couldn't find activation function mish, going with ReLU
+conv    512  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.797 BFLOPs
+   98 res   95                  13 x  13 x 512   ->    13 x  13 x 512
+   99 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.089 BFLOPs
+  100 Couldn't find activation function mish, going with ReLU
+conv    512  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.797 BFLOPs
+  101 res   98                  13 x  13 x 512   ->    13 x  13 x 512
+  102 Couldn't find activation function mish, going with ReLU
+conv    512  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 512  0.089 BFLOPs
+  103 route  102 87
+  104 Couldn't find activation function mish, going with ReLU
+conv   1024  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x1024  0.354 BFLOPs
+  105 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  106 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+  107 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  108 max          5 x 5 / 1    13 x  13 x 512   ->    13 x  13 x 512
+  109 route  107
+  110 max          9 x 9 / 1    13 x  13 x 512   ->    13 x  13 x 512
+  111 route  107
+  112 max          13 x 13 / 1    13 x  13 x 512   ->    13 x  13 x 512
+  113 route  112 110 108 107
+  114 conv    512  1 x 1 / 1    13 x  13 x2048   ->    13 x  13 x 512  0.354 BFLOPs
+  115 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+  116 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  117 conv    256  1 x 1 / 1    13 x  13 x 512   ->    13 x  13 x 256  0.044 BFLOPs
+  118 upsample            2x    13 x  13 x 256   ->    26 x  26 x 256
+  119 route  85
+  120 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  121 route  120 118
+  122 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  123 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+  124 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  125 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+  126 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  127 conv    128  1 x 1 / 1    26 x  26 x 256   ->    26 x  26 x 128  0.044 BFLOPs
+  128 upsample            2x    26 x  26 x 128   ->    52 x  52 x 128
+  129 route  54
+  130 conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+  131 route  130 128
+  132 conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+  133 conv    256  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+  134 conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+  135 conv    256  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+  136 conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+  137 conv    256  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+  138 conv     21  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x  21  0.029 BFLOPs
+  139 yolo
+Unused field: 'scale_x_y = 1.2'
+Unused field: 'iou_thresh = 0.213'
+Unused field: 'cls_normalizer = 1.0'
+Unused field: 'iou_normalizer = 0.07'
+Unused field: 'iou_loss = ciou'
+Unused field: 'nms_kind = greedynms'
+Unused field: 'beta_nms = 0.6'
+Unused field: 'max_delta = 5'
+  140 route  136
+  141 conv    256  3 x 3 / 2    52 x  52 x 128   ->    26 x  26 x 256  0.399 BFLOPs
+  142 route  141 126
+  143 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  144 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+  145 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  146 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+  147 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+  148 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+  149 conv     21  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x  21  0.015 BFLOPs
+  150 yolo
+Unused field: 'scale_x_y = 1.1'
+Unused field: 'iou_thresh = 0.213'
+Unused field: 'cls_normalizer = 1.0'
+Unused field: 'iou_normalizer = 0.07'
+Unused field: 'iou_loss = ciou'
+Unused field: 'nms_kind = greedynms'
+Unused field: 'beta_nms = 0.6'
+Unused field: 'max_delta = 5'
+  151 route  147
+  152 conv    512  3 x 3 / 2    26 x  26 x 256   ->    13 x  13 x 512  0.399 BFLOPs
+  153 route  152 116
+  154 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  155 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+  156 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  157 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+  158 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+  159 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+  160 conv     21  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x  21  0.007 BFLOPs
+  161 yolo
+Unused field: 'scale_x_y = 1.05'
+Unused field: 'iou_thresh = 0.213'
+Unused field: 'cls_normalizer = 1.0'
+Unused field: 'iou_normalizer = 0.07'
+Unused field: 'iou_loss = ciou'
+Unused field: 'nms_kind = greedynms'
+Unused field: 'beta_nms = 0.6'
+Unused field: 'max_delta = 5'
+Loading weights from yolov4.conv.137...Done!
+Learning Rate: 0.001, Momentum: 0.949, Decay: 0.0005
+Resizing
+608
+Couldn't open file: data/obj/labelsInamage_jpg.rf.65322d152e11c328217e630364f8e5f5.txt
+
