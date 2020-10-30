@@ -13,7 +13,9 @@ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optim
 #Copy downloaded url
 
 cd darknet
-!curl -L [https://app.roboflow.com/ds/UjaO58Ucjv?key=KjiQmgvln7] > roboflow.zip; unzip roboflow.zip; rm roboflow.zip
+wget -O roboflow.zip https://app.roboflow.com/ds/UjaO58Ucjv?key=KjiQmgvln7
+unzip roboflow.zip
+rm roboflow.zip
 
 
 #Set up training file directories for custom dataset
@@ -25,25 +27,7 @@ cp train/*.jpg data/obj/
 cp valid/*.jpg data/obj/
 
 cp train/*.txt data/obj/
-cp valid/*.txt data/obj/
 
-with open('data/obj.data', 'w') as out:
-  out.write('classes = 3\n')
-  out.write('train = data/train.txt\n')
-  out.write('valid = data/valid.txt\n')
-  out.write('names = data/obj.names\n')
-  out.write('backup = backup/')
+#now run write_files.py as command line script in darknet folder
 
-#write train file (just the image list)
-import os
-
-with open('data/train.txt', 'w') as out:
-  for img in [f for f in os.listdir('train') if f.endswith('jpg')]:
-    out.write('data/obj/' + img + '\n')
-
-#write the valid file (just the image list)
-import os
-
-with open('data/valid.txt', 'w') as out:
-  for img in [f for f in os.listdir('valid') if f.endswith('jpg')]:
-    out.write('data/obj/' + img + '\n')
+#run training_config.py as command line script in darknet folder
