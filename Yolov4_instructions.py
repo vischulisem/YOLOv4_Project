@@ -27,6 +27,7 @@ cp train/*.jpg data/obj/
 cp valid/*.jpg data/obj/
 
 cp train/*.txt data/obj/
+cp valid/*.txt data/obj/
 
 #now run write_files.py as command line script in darknet folder
 

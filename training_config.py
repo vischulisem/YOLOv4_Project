@@ -9,7 +9,7 @@ def file_len(fname):
     return i + 1
 
 
-num_classes = file_len('train/_darknet.labels')
+num_classes = file_len('data/obj.names')
 print("writing config for a custom YOLOv4 detector detecting number of classes: " + str(num_classes))
 
 # Instructions from the darknet repo
